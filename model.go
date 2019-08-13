@@ -31,8 +31,10 @@ type (
 		err error
 	}
 	// gist manager
-	GistManager struct{}
+	GistManager struct{
+		TOKEN string
+	}
 )
 
-const GIST_OAUTH_TOKEN = "5ef8d67e0e20aa99bc4894377ec938c702bf1a3b"
+const GIST_OAUTH_TOKEN = "your gist oauth token here."
 const GIST_API_URL = "https://api.github.com/gists"

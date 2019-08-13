@@ -4,13 +4,15 @@ import (
 	"encoding/json"
 	)
 
-func NewGistManager()*GistManager{
-	return &GistManager{}
+func NewGistManager(token string)*GistManager{
+	return &GistManager{
+		TOKEN:token,
+	}
 }
 
 func (manager *GistManager) CreateGist(gist *Gist) (bool, error) {
 	headers := map[string]string{
-		"Authorization": "Token "+ GIST_OAUTH_TOKEN,
+		"Authorization": "Token "+ manager.TOKEN,
 	}
 	resp := NewRequest("POST", GIST_API_URL).Headers(headers).Body(gist).DoRequest()
 	if resp.err != nil {
@@ -21,7 +23,7 @@ func (manager *GistManager) CreateGist(gist *Gist) (bool, error) {
 
 func (manager *GistManager)UpdateGist(gist *Gist) (bool, error) {
 	headers := map[string]string{
-		"Authorization": "Token "+ GIST_OAUTH_TOKEN,
+		"Authorization": "Token "+ manager.TOKEN,
 	}
 	url := GIST_API_URL + "/" + gist.Id
 	resp := NewRequest("POST", url).Headers(headers).Body(gist).DoRequest()
@@ -33,7 +35,7 @@ func (manager *GistManager)UpdateGist(gist *Gist) (bool, error) {
 
 func (manager *GistManager)DeleteGist(id string) (bool, error) {
 	headers := map[string]string{
-		"Authorization": "Token "+ GIST_OAUTH_TOKEN,
+		"Authorization": "Token "+ manager.TOKEN,
 	}
 	url := GIST_API_URL  + "/" + id
 	resp := NewRequest("DELETE", url).Headers(headers).DoRequest()
@@ -45,7 +47,7 @@ func (manager *GistManager)DeleteGist(id string) (bool, error) {
 
 func (manager *GistManager)ShowGist(id string) (*Gist, error) {
 	headers := map[string]string{
-		"Authorization": "Token "+ GIST_OAUTH_TOKEN,
+		"Authorization": "Token "+ manager.TOKEN,
 	}
 	url := GIST_API_URL + "/" + id
 	response := NewRequest("GET", url).Headers(headers).DoRequest()
@@ -60,7 +62,7 @@ func (manager *GistManager)ShowGist(id string) (*Gist, error) {
 
 func (manager *GistManager) ListGists() ([]*Gist, error) {
 	headers := map[string]string{
-		"Authorization": "Token "+ GIST_OAUTH_TOKEN,
+		"Authorization": "Token "+ manager.TOKEN,
 	}
 	response := NewRequest("GET", GIST_API_URL).Headers(headers).DoRequest()
 	if response.err != nil {

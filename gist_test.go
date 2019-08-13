@@ -12,7 +12,7 @@ func TestGistManager_CreateGist(t *testing.T) {
 			},
 		},
 	}
-	gistmanager := NewGistManager()
+	gistmanager := NewGistManager(GIST_OAUTH_TOKEN)
 	success, err := gistmanager.CreateGist(gist)
 	if err != nil {
 		t.Error(err)
@@ -27,14 +27,14 @@ func TestGistManager_UpdateGist(t *testing.T) {
 		Description:"描述部分信息",
 		Files: map[string]GistFile{
 			"file1": GistFile{
-				Content:"file1的文件正文部分",
+				Content:"file1的文件正文部分啦啦啦啦",
 			},
 			"file2": GistFile{
-				Content:"document content in file2.",
+				Content:"document content in file2.🌶😋😝",
 			},
 		},
 	}
-	gistmanager := NewGistManager()
+	gistmanager := NewGistManager(GIST_OAUTH_TOKEN)
 	success, err := gistmanager.UpdateGist(gist)
 	if err != nil {
 		t.Error(err)
@@ -43,7 +43,7 @@ func TestGistManager_UpdateGist(t *testing.T) {
 }
 
 func TestGistManager_DeleteGist(t *testing.T) {
-	gistmanager := NewGistManager()
+	gistmanager := NewGistManager(GIST_OAUTH_TOKEN)
 	id := "1bd738b1bcb0b1baa2366e3302aa5c5d"
 	success, err := gistmanager.DeleteGist(id)
 	if err != nil {
@@ -53,7 +53,7 @@ func TestGistManager_DeleteGist(t *testing.T) {
 }
 
 func TestGistManager_ShowGist(t *testing.T) {
-	gistmanager := NewGistManager()
+	gistmanager := NewGistManager(GIST_OAUTH_TOKEN)
 	id := "e021cda97f595181a04151a765084044"
 	gist, err := gistmanager.ShowGist(id)
 	if err != nil {
@@ -63,7 +63,7 @@ func TestGistManager_ShowGist(t *testing.T) {
 }
 
 func TestGistManager_List(t *testing.T) {
-	gistmanager := NewGistManager()
+	gistmanager := NewGistManager(GIST_OAUTH_TOKEN)
 	gists, err := gistmanager.ListGists()
 	if err != nil {
 		t.Error(err)
