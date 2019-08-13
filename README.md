@@ -6,8 +6,13 @@ CRUD for gist in console.
 
 0 get your own gist oauth token from [OAuth](https://developer.github.com/v3/gists/)
 
+1 get the depemdency
+```bash
+go get github.com/guoruibiao/gist
+```
 
-1 create a gist
+
+2 create a gist
 ```golang
 package main
 
@@ -37,7 +42,7 @@ func main() {
 }
 ```
 
-2 delete a gist
+3 delete a gist
 ```golang
 gistmanager := NewGistManager(GIST_OAUTH_TOKEN)
 id := "1bd738b1bcb0b1baa2366e3302aa5c5d"
@@ -49,7 +54,7 @@ t.Log(success)
 
 ```
 
-3. update a gist
+4. update a gist
 ```golang
 gist := &Gist{
     Id:"d04ff9bb10ae9394758f8ae02c78b010",
@@ -73,7 +78,7 @@ t.Log(success)
 
 ```
 
-4. show a gist
+5. show a gist
 ```golang
 gistmanager := NewGistManager(GIST_OAUTH_TOKEN)
 id := "e021cda97f595181a04151a765084044"
@@ -84,7 +89,7 @@ if err != nil {
 t.Log(gist)
 ```
 
-5. get gist list
+6. get gist list
 ```golang
 gistmanager := NewGistManager(GIST_OAUTH_TOKEN)
 gists, err := gistmanager.ListGists()
@@ -94,6 +99,9 @@ if err != nil {
 t.Log(gists)
 t.Log(gists[0])
 ```
+
+
+enjoy :)
 
 ## reference
 [gist-REST-API-v3](https://developer.github.com/v3/gists/#list-gist-forks)
