@@ -4,6 +4,7 @@ import (
 		"net/http"
 	"bytes"
 	"encoding/json"
+	"io/ioutil"
 )
 
 
@@ -67,3 +68,12 @@ func (request *Request) DoRequest() *Response {
 	return &Response{resp:resp, err:nil}
 }
 
+
+func (response *Response)GetResponse() (string, error){
+	bytes, err := ioutil.ReadAll(response.resp.Body)
+	if err != nil {
+		return "", err
+	}
+	defer response.resp.Body.Close()
+	return string(bytes), nil
+}
